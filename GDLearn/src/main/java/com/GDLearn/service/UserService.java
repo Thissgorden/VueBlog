@@ -2,7 +2,6 @@ package com.GDLearn.service;
 
 import com.GDLearn.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -15,4 +14,5 @@ import org.springframework.stereotype.Service;
 
 public interface UserService extends IService<User> {
 
+    String getAuthority(User user);
 }

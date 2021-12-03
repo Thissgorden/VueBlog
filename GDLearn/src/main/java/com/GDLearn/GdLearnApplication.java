@@ -9,5 +9,4 @@ public class GdLearnApplication {
     public static void main(String[] args) {
         SpringApplication.run(GdLearnApplication.class, args);
     }
-
 }

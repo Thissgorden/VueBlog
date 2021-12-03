@@ -1,66 +1,90 @@
 <template>
-  <div id="all">
-    <el-container>
+  <el-row type="flex" class="el-row" justify="center">
 
-      <el-header>
-        <img class="mlogo" src="../img/waterpng.png" alt="">
-      </el-header>
-      <a href="/" id="return">返回主页</a>
-      <el-main>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="账号" prop="username">
-            <el-input v-model="ruleForm.username"></el-input>
-          </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="ruleForm.password"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
-          </el-form-item>
-        </el-form>
-      </el-main>
-    </el-container>
-  </div>
+    <el-col id="loginLeft" :span="7">
+      <h2>欢迎来到Gd的个人博客</h2>
+      <el-button plain @click="visitor">游客入口</el-button>
+
+      <p>没有账号？点击上方按钮以游客身份进行访问 </p>
+    </el-col>
+
+    <el-col :span="1">
+
+      <el-divider direction="vertical"></el-divider>
+
+    </el-col>
+    <el-col :span="8">
+
+      <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="username" style="width: 380px">
+          <el-input v-model="loginForm.username"></el-input>
+        </el-form-item>
+
+        <el-form-item label="密码" prop="password" style="width: 380px">
+          <el-input type="password" v-model="loginForm.password"></el-input>
+        </el-form-item>
+
+        <el-form-item label="验证码" prop="code">
+          <el-input v-model="loginForm.code" class="codeinput"></el-input>
+          <el-image :src="captchaImg" @click="getCaptcha" class="codeimg"></el-image>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('loginForm')">立即创建</el-button>
+          <el-button @click="resetForm('loginForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+
+    </el-col>
+
+  </el-row>
 </template>
 
 <script>
+import qs from 'qs'
 export default {
-  name: "Login",
+  name: "login",
   data() {
     return {
-      ruleForm: {
-        username: '',
-        password: '',
+      loginForm: {
+        username: 'admin ',
+        password: 'admin',
+        code: '55555',
+        key:'55555'
       },
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+          {required: true, message: '请输入用户名', trigger: 'blur'},
+          {min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur'}
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+          {required: true, message: '请输入密码', trigger: 'blur'},
+          {min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur'}
         ],
-      }
+        code: [
+          {required: true, message: '请输入验证码', trigger: 'blur'},
+          {min: 5, max: 5, message: '请输入正确的验证码', trigger: 'blur'}
+        ]
+      },
+      captchaImg :''
     };
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const _this = this;
-          this.$axios.post("/login",this.ruleForm).then(res =>{
-
+          const _this=this
+          this.$axios.post('/login?'+qs.stringify(this.loginForm)).then(res =>{
             const jwt = res.headers['authorization']
             const userInfo = res.data.data
 
-            _this.$store.commit("SET_TOKEN",jwt);
+            _this.$store.commit('SET_TOKEN',jwt)
             _this.$store.commit("SET_USERINFO",userInfo);
-            _this.$router.push("/blogs")
-          });
+
+            _this.$router.push('/')
+          })
         } else {
-          console.log('error submit!!');
+          console.log('提交出错');
           return false;
         }
       });
@@ -68,63 +92,61 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    /*
-    getsomething(){
-      console.log(this.$store.getters.getUser);
-    }
+    visitor(){
+      const _this = this;
+        this.$axios.get('/visitor').then(res =>{
+          const jwt = res.headers['authorization']
+          const userInfo = res.data.data
+
+          _this.$store.commit('SET_TOKEN',jwt)
+          _this.$store.commit("SET_USERINFO",userInfo);
+
+          _this.$router.push('/')
+        })
+    },
+
+    /**
+     * 获取验证码的方法
      */
+    getCaptcha() {
+      this.$axios.get('/captcha').then(res => {
+        this.loginForm.key = res.data.data.key//存储返回的token
+        this.captchaImg =res.data.data.base64Img
+      });
+    }
+  },
+  created() {
+    if(localStorage.getItem("token")!=null){
+      this.$alert("您已经登陆！")
+      this.$router.push("/")
+    }
+    this.getCaptcha();
   }
 }
-
 </script>
 
 <style scoped>
-.el-header, .el-footer {
-  background-color: #EDEDED;
-  color: #333;
+.el-row {
+  background-color: #fafafa;
+  height: 97vh;
+  display: flex;
+  align-items: center;
+}
+
+#loginLeft {
   text-align: center;
-  line-height: 60px;
+  border-radius: 4px;
 }
 
-.el-aside {
-  /*background-color: #D3DCE6;*/
-  color: #333;
-  text-align: center;
-  line-height: 200px;
+.codeimg {
+  margin-left: 8px;
+  width: 100px;
+  float: left;
 }
 
-.el-main {
-  /*background-color: #E9EEF3;*/
-  color: #333;
-  text-align: center;
-  line-height: 160px;
+.codeinput {
+  width: 90px;
+  float: left;
 }
 
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
-
-.mlogo{
-  height: 60px;
-}
-
-.demo-ruleForm{
-  max-width: 500px;
-  margin: auto;
-}
-
-#return{
-  padding: 2px 10px;
-  text-underline-position:under;
-  color: cornflowerblue;
-}
 </style>

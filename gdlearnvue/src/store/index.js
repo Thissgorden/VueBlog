@@ -29,6 +29,9 @@ export default new Vuex.Store({
     //get 同上 用于取值
     getUser: state => {
       return state.userInfo
+    },
+    getToken: state => {
+      return state.token
     }
   },
   actions: {

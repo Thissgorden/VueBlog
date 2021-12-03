@@ -59,7 +59,10 @@ export default {
 
 <style scoped>
 .mpage{
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
+}
+.block{
+  width: 95%;
 }
 </style>

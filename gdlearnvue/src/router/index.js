@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import BlogEdit from '../views/BlogEdit.vue'
+import BlogAdd from "@/views/BlogAdd";
+import Gacha from "@/views/Gacha";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,7 +31,7 @@ const routes = [
         meta: {
             requireAuth: true
         },
-        component: BlogEdit
+        component: BlogAdd
     },
     {
         path: '/blog/:blogId',
@@ -42,6 +45,11 @@ const routes = [
             requireAuth: true
         },
         component: BlogEdit
+    },
+    {
+        path: '/gacha',
+        name: 'Gacha',
+        component: Gacha
     }
 ];
 const router = new VueRouter({

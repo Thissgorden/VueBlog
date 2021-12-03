@@ -18,7 +18,7 @@ public class gachaTest {
 
     @Test
     public void Hikuone(){
-        Gacha charUnlimit5stars = gaChaUtils.getCharlimit4stars();
-        System.out.println(charUnlimit5stars);
+            Gacha res = gaChaUtils.getWeapon3stars();
+            System.out.println(res);
     }
 }

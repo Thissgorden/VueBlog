@@ -15,4 +15,14 @@ public class GachaProtect {
 
     //是否四星保底
     boolean isProtect4;
+
+    public GachaProtect ProtectcountPlus(){
+        Protectcount++;
+        return this;
+    }
+
+    public GachaProtect Protect4countPlus(){
+        Protect4count++;
+        return this;
+    }
 }

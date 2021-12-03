@@ -4,7 +4,6 @@ package com.GDLearn.controller;
 import com.GDLearn.entity.User;
 import com.GDLearn.lang.Result;
 import com.GDLearn.service.UserService;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +24,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequiresAuthentication
+
     @GetMapping("/index")
     public Object index(){
         User usr = userService.getById(1L);

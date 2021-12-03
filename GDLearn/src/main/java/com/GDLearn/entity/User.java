@@ -37,7 +37,6 @@ public class User implements Serializable {
     private String avatar;
 
     @Email
-    @NotBlank(message = "邮箱不能为空")
     private String email;
 
     private String password;
@@ -48,5 +47,6 @@ public class User implements Serializable {
 
     private LocalDateTime lastLogin;
 
+    private String roleid;
 
 }
