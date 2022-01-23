@@ -3,7 +3,6 @@ gdlearn:
     secret: f4e2e52034348f86b67cde581c0f9eb5 #f4e2e52015448f86b67cde581c0f9eb5 #f4e2e52034348f86b67cde581c0f9eb5旧秘钥
     expire: 604800
     header: Authorization
-
 logging:
   file:
     name: log/logfile.log
@@ -15,3 +14,23 @@ logging:
 #    pickup4starid1: 3
 #    pickup5starid2: 9
 #    pickup5starid3: 11
+
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 690319344@qq.com
+    password: utdenkqungyybahi
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+mymail:
+  settings:
+    siteaddress: 127.0.0.1:8081 #服务器的地址
+    from: 690319344@qq.com
+    subject: 欢迎使用gd的网站

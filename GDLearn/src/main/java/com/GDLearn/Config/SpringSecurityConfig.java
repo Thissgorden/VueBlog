@@ -50,7 +50,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/captcha",
             "/favicon.icon",
             "/test/**",
-            "/visitor"
+            "/visitor",
+            "/activateAccount"
     };
 
     @Override
