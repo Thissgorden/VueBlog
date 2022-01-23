@@ -1,4 +1,4 @@
-FROM java:11
+FROM openjdk:16.0-jdk-buster
 
 EXPOSE 8081
 

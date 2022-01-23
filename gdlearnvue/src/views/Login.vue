@@ -30,8 +30,8 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('loginForm')">立即创建</el-button>
-          <el-button @click="resetForm('loginForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
+          <!-- <el-button @click="resetForm('loginForm')">重置</el-button> -->
         </el-form-item>
       </el-form>
 
@@ -47,10 +47,10 @@ export default {
   data() {
     return {
       loginForm: {
-        username: 'admin ',
-        password: 'admin',
-        code: '55555',
-        key:'55555'
+        username: '',
+        password: '',
+        code: '',
+        key:''
       },
       rules: {
         username: [
@@ -89,9 +89,9 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
+    // resetForm(formName) {
+    //   this.$refs[formName].resetFields();
+    // },
     visitor(){
       const _this = this;
         this.$axios.get('/visitor').then(res =>{

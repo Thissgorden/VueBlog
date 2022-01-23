@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <el-container>
+    <Aside></Aside>
+    <el-container direction="vertical">
     <Header></Header>
     <div class="mblog">
       <div>
@@ -21,16 +23,22 @@
       <el-divider></el-divider>
       <div class="markdown-body" v-html="blog.content"></div>
     </div>
-  </div>
+    <Footer></Footer>
+    </el-container>
+
+  </el-container>
+
 </template>
 
 <script>
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Aside from "../components/Aside.vue";
 //import "github-markdown-css/github-markdown.css"
 
 export default {
   name: "BlogDetail",
-  components: {Header},
+  components: {Footer, Header,Aside},
   data() {
     return {
       blog: {

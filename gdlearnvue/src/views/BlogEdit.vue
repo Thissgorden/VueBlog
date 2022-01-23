@@ -19,16 +19,16 @@
         </el-form-item>
       </el-form>
     </div>
-
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
-
+import Footer from "@/components/Footer";
 export default {
   name: "BlogEdit",
-  components: {Header},
+  components: {Header,Footer},
   data() {
     return {
       ruleForm: {
@@ -74,7 +74,7 @@ export default {
       this.$alert('操作成功', '提示', {
         confirmButtonText: '确定',
         callback: () => {
-          this.$router.push("/blogs")
+          this.$router.push("/blog/"+this.$route.params.blogId)
         }
       });
     },

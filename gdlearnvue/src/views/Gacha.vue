@@ -4,6 +4,7 @@
     <div style="margin: 20px">
       <h1>原神抽卡模拟界面</h1>
       <div>仅供娱乐，该界面数据不保存！图片数据来自：https://wiki.biligame.com/ys</div>
+      <div>概率与保底系统逻辑上和原神游戏内一致，不代表游戏内实际概率。注意！数据库内容并不包含所有角色以及武器</div>
     </div>
 
     <el-divider></el-divider>
@@ -64,13 +65,14 @@
         </div>
       </el-col>
     </el-row>
-
-
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
 import qs from 'qs'
 
 export default {
@@ -92,7 +94,7 @@ export default {
     }
   },
   name: "Gacha",
-  components: {Header},
+  components: {Header,Footer},
   methods:{
     rollOnce(){
       this.$axios.post('/Gacha?'+qs.stringify(this.protect)).then(res=>{

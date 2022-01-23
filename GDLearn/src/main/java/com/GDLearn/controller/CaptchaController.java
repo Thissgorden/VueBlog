@@ -27,8 +27,8 @@ public class CaptchaController {
     public Result getCaptcha() throws IOException {
         String key = UUID.randomUUID().toString();
         String code = producer.createText();
-        key="55555";
-        code="55555";
+        //key="55555";
+        //code="55555";
 
         BufferedImage bi = producer.createImage(code);
         //创建字节输出流

@@ -5,6 +5,7 @@ import BlogDetail from '../views/BlogDetail.vue'
 import BlogEdit from '../views/BlogEdit.vue'
 import BlogAdd from "@/views/BlogAdd";
 import Gacha from "@/views/Gacha";
+import Registry from "@/views/UserCenter/Registry.vue"
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,11 @@ const routes = [
         path: '/gacha',
         name: 'Gacha',
         component: Gacha
+    },
+    {
+        path: '/registry',
+        name: 'registry',
+        component: Registry
     }
 ];
 const router = new VueRouter({

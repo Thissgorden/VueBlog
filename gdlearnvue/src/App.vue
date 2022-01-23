@@ -29,8 +29,6 @@ export default {
   width: auto;
   max-width: 90%;
   margin: auto;
-  height: 100%;
-  min-height: 99vh;
 }
 
 .background {

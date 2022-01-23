@@ -4,11 +4,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
+
 import java.util.Date;
 
 
@@ -41,7 +40,6 @@ public class JwtUtils {
                     .parseClaimsJws(token)
                     .getBody();
         }catch (Exception e){
-            //log.debug("validate is token error ", e);
             System.out.println("--------------");
             System.out.println("Token验证出错");
             return null;
