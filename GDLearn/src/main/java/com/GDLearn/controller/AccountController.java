@@ -81,7 +81,6 @@ public class AccountController {
         return Result.fail("token解析出错!");
     }
 
-
     @GetMapping("/visitor")
     public Result visitor(HttpServletResponse resp){
         String jwt = jwtUtils.generateToken("visitor");

@@ -2,32 +2,35 @@
   <el-container>
     <Aside></Aside>
     <el-container direction="vertical">
-    <Header></Header>
-    <div class="mblog">
-      <div>
-      <h2 class="title">{{ blog.title }}</h2>
-      <h3 class="author">作者:{{blog.owner}}</h3>
-    </div>
-      <div class="function-area">
-        <div class="function-part" v-if="ownBlog">
-          <el-button slot="reference" @click="gotoEdit(blog.id)" type="primary">编辑</el-button>
+      <Header></Header>
+      <div class="mblog" :style="{ 'min-height': ch +'px'}">
+        <div>
+          <h2 class="title">{{ blog.title }}</h2>
+          <h3 class="author">作者:{{ blog.owner }}</h3>
+        </div>
+        <div class="function-area">
+          <div class="function-part" v-if="ownBlog">
+            <el-button
+              slot="reference"
+              @click="gotoEdit(blog.id)"
+              type="primary"
+              >编辑</el-button
+            >
+          </div>
+
+          <div class="function-part" v-if="ownBlog">
+            <el-popconfirm title="确定删除吗？" @confirm="delBlog(blog.id)">
+              <el-button slot="reference" type="danger">删除</el-button>
+            </el-popconfirm>
+          </div>
         </div>
 
-        <div class="function-part" v-if="ownBlog">
-          <el-popconfirm title="确定删除吗？" @confirm="delBlog(blog.id)">
-            <el-button slot="reference" type="danger">删除</el-button>
-          </el-popconfirm>
-        </div>
+        <el-divider></el-divider>
+        <div class="markdown-body" v-html="blog.content"></div>
       </div>
-
-      <el-divider></el-divider>
-      <div class="markdown-body" v-html="blog.content"></div>
-    </div>
-    <Footer></Footer>
+      <Footer></Footer>
     </el-container>
-
   </el-container>
-
 </template>
 
 <script>
@@ -38,38 +41,40 @@ import Aside from "../components/Aside.vue";
 
 export default {
   name: "BlogDetail",
-  components: {Footer, Header,Aside},
+  components: { Footer, Header, Aside },
   data() {
     return {
       blog: {
-        id: '',
-        title: '加载中',
-        content: '请稍后，内容加载中',
-        owner: ''
+        id: "",
+        title: "加载中",
+        content: "请稍后，内容加载中",
+        owner: "",
       },
-      ownBlog: false
-    }
-  }, methods: {
+      ch: document.documentElement.clientHeight-190,
+      ownBlog: false,
+    };
+  },
+  methods: {
     delBlog(blogId) {
-      this.$axios.get('/blog/delete?blogId='+blogId).then(() => {
-        this.$alert('删除成功','提示',{
-          confirmButtonText:'确定',
-          callback:()=>{
-            this.$router.push('/blogs')
-          }
-        })
-      })
+      this.$axios.get("/blog/delete?blogId=" + blogId).then(() => {
+        this.$alert("删除成功", "提示", {
+          confirmButtonText: "确定",
+          callback: () => {
+            this.$router.push("/blogs");
+          },
+        });
+      });
     },
-    gotoEdit(blogId){
-      this.$router.push('/blog/'+blogId+'/edit')
-    }
+    gotoEdit(blogId) {
+      this.$router.push("/blog/" + blogId + "/edit");
+    },
   },
   created() {
     const _this = this;
     const blogId = this.$route.params.blogId;
     if (blogId) {
-      _this.$axios.get('/blog/detail/' + blogId).then(res => {
-        const blog = res.data.data//整个data就是blog对象
+      _this.$axios.get("/blog/detail/" + blogId).then((res) => {
+        const blog = res.data.data; //整个data就是blog对象
         if (blog.id !== null) {
           _this.blog.id = blog.id;
         }
@@ -85,22 +90,22 @@ export default {
 
         var usr = this.$store.getters.getUser;
 
-        if (Object.prototype.hasOwnProperty.call(usr, 'id')) {
-          _this.ownBlog = (blog.userId === this.$store.getters.getUser.id || usr.roleid == 2)
+        if (Object.prototype.hasOwnProperty.call(usr, "id")) {
+          _this.ownBlog =
+            blog.userId === this.$store.getters.getUser.id || usr.roleid == 2;
         }
       });
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
 .mblog {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   width: 95%;
-  min-height: 700px;
   padding: 10px 35px;
-  margin: auto
+  margin: auto;
 }
 
 .title {
@@ -110,7 +115,7 @@ export default {
 
 .function-part {
   margin: 10px;
-  display:inline-block;
+  display: inline-block;
 }
 
 .function-area {
@@ -122,9 +127,9 @@ export default {
   height: 10px;
 }
 
-.markdown-body{
+.markdown-body {
   overflow: hidden;
-  word-wrap:break-word;
+  word-wrap: break-word;
   word-break: break-all;
 }
 </style>

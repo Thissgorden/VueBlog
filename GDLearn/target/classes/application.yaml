@@ -3,11 +3,14 @@ gdlearn:
     secret: f4e2e52034348f86b67cde581c0f9eb5 #f4e2e52015448f86b67cde581c0f9eb5 #f4e2e52034348f86b67cde581c0f9eb5旧秘钥
     expire: 604800
     header: Authorization
+    frontsite: 127.0.0.1:8080 #前端地址
+
 logging:
   file:
     name: log/logfile.log
   level:
     root: info #日志级别 root表示所有包，也可以单独配置具体包 fatal error warn info debug trace off
+
 #  当期pickup角色的数据库id
 #  gacha:
 #    pickup5starid: 1

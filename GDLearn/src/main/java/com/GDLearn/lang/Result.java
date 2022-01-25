@@ -22,6 +22,15 @@ public class Result implements Serializable {
         r.setData(data);
         return r;
     }
+
+    public static Result sucess(String msg,Object data){
+        Result r = new Result();
+        r.setMsg(msg);
+        r.setCode(200);
+        r.setData(data);
+        return r;
+    }
+
     public static Result fail(String msg){
         return fail(500,msg,null);
     }

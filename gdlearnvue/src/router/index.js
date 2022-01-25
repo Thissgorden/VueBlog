@@ -6,6 +6,7 @@ import BlogEdit from '../views/BlogEdit.vue'
 import BlogAdd from "@/views/BlogAdd";
 import Gacha from "@/views/Gacha";
 import Registry from "@/views/UserCenter/Registry.vue"
+import RegistryP from "@/views/UserCenter/RegistryProcess.vue"
 
 Vue.use(VueRouter)
 
@@ -56,7 +57,12 @@ const routes = [
         path: '/registry',
         name: 'registry',
         component: Registry
-    }
+    },
+    {
+        path: '/rgP',
+        name: 'RegistryP',
+        component: RegistryP
+    },
 ];
 const router = new VueRouter({
     mode: 'history',

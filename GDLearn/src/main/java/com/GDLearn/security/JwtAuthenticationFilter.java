@@ -56,7 +56,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             //通过验证token有效
             String username = claim.getSubject();
             User sysUser = userService.getOne(new QueryWrapper<User>(new User().setUsername(username)));
-            //这里可以设置获取用户权限信息，但是目前暂无权限信息表所以忽略
+            //这里可以设置获取用户权限信息
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(sysUser,null, userDetailsService.getAuthority(sysUser));
             //完成JWT校验后剩下的交由Security上下文自动完成登陆的过程
             SecurityContextHolder.getContext().setAuthentication(token);

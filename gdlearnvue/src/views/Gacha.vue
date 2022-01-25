@@ -1,12 +1,11 @@
 <template>
-  <div>
+  <el-container direction="vertical">
     <Header></Header>
-    <div style="margin: 20px">
-      <h1>原神抽卡模拟界面</h1>
+    <el-container style="margin: 20px">
       <div>仅供娱乐，该界面数据不保存！图片数据来自：https://wiki.biligame.com/ys</div>
       <div>概率与保底系统逻辑上和原神游戏内一致，不代表游戏内实际概率。注意！数据库内容并不包含所有角色以及武器</div>
-    </div>
-
+    </el-container>
+    <h1 style="margin: 0 20px">原神抽卡模拟界面</h1>
     <el-divider></el-divider>
     <el-row :gutter="20">
       <el-col :span="12">
@@ -66,7 +65,7 @@
       </el-col>
     </el-row>
     <Footer></Footer>
-  </div>
+  </el-container>
 </template>
 
 <script>
@@ -144,9 +143,6 @@ export default {
 }
 
 .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
   text-align: center;
-  line-height: 60px;
 }
 </style>

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,10 +25,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(sysUser == null){
             throw new UsernameNotFoundException("用户名或密码不正确");
         }
+
+        sysUser.setLastLogin(LocalDateTime.now());
+        userService.updateById(sysUser);//更新登陆时间
+
         return new org.springframework.security.core.userdetails.User(
                 sysUser.getUsername(),
                 sysUser.getPassword(),
-                //todo  权限表
                 getAuthority(sysUser)
                 );
     }

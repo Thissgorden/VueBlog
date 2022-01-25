@@ -58,7 +58,7 @@ public class BlogController {
 
 
     @GetMapping("/detail/{id}")
-    @PreAuthorize("hasAnyAuthority('normal,admin,visitor')")
+    //@PreAuthorize("hasAnyAuthority('normal,admin,visitor')")
     public Result detail(@PathVariable(name= "id") Long id){
         Blog blog = blogService.getById(id);
         //去数据库拿一下作者名

@@ -43,7 +43,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
+    /*
     private static final String[] URL_WHITELIST = {
             "/login",
             "/logout",
@@ -51,8 +51,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/favicon.icon",
             "/test/**",
             "/visitor",
-            "/activateAccount"
-    };
+            "/activateAccount",
+            "/register",
+            "/blog/list"
+    };*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -68,13 +70,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()//登出
                 .logout().logoutSuccessHandler(logoutHandler)
 
-                .and()//配置拦截器
+                //.and()//配置拦截器
                 //配置拦截器的主方法,后边都是子方法
-                .authorizeRequests()
-                .antMatchers(URL_WHITELIST).permitAll()//先放行白名单
-                .anyRequest()
+                //.authorizeRequests()
+                //.antMatchers(URL_WHITELIST).permitAll()//先放行白名单
+                //.anyRequest()
                 //任意请求都需要授权
-                .authenticated()
+                //.authenticated()
 
                 .and()//异常处理
                 .exceptionHandling()//异常处理主方法

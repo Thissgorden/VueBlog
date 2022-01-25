@@ -1,5 +1,6 @@
 package com.GDLearn.service;
 
+import com.GDLearn.dto.RegistryDto;
 import com.GDLearn.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,4 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface UserService extends IService<User> {
 
     String getAuthority(User user);
+
+    boolean register(User user,RegistryDto dto);
 }

@@ -49,4 +49,18 @@ public class User implements Serializable {
 
     private String roleid;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", created=" + created +
+                ", lastLogin=" + lastLogin +
+                ", roleid='" + roleid + '\'' +
+                '}';
+    }
 }

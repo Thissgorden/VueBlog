@@ -14,7 +14,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
         let res = response.data;
 
-        if (res.code === 200) {
+        if (res.code === 200 ||res.code === 203) {
             return response;
         } else {
             Element.Message.error(response.data.msg, {duration: 3 * 1000});

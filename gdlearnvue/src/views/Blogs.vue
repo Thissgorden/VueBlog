@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container :style="{'min-height': clientHeight + 'px'}">
     <Aside></Aside>
     <el-container direction="vertical">
       <Header></Header>
@@ -55,6 +55,7 @@ export default {
       currentPage: 1,
       total: 0,
       pageSize: 5,
+      clientHeight: document.documentElement.clientHeight
     };
   },
   methods: {
